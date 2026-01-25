@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Powered Menopause Consultation</title>
+    <title>Clinician-Led Menopause Assessment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes fade-in {
@@ -41,13 +41,19 @@
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
-                AI-Powered Menopause Consultation
+                Clinician-Led Menopause Assessment
             </h1>
             <div class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">
-                ✨ AI Enhanced
+                Clinical Decision Support
             </div>
         </div>
-        <p class="text-gray-600 mb-6">20+ minutes consultation with Claude AI-powered clinical recommendations</p>
+        <p class="text-gray-600 mb-2">
+            Structured menopause consultation tool for use by a qualified health professional.
+        </p>
+        <p class="text-sm text-gray-500 mb-6">
+            Developed by Dr Premila Hewage · Further patient information: 
+            <a href="https://www.pausesleep.com.au" target="_blank" class="text-purple-700 underline">www.pausesleep.com.au</a>
+        </p>
 
         <form id="consultForm" class="space-y-6">
             <!-- Patient Details -->
@@ -429,26 +435,22 @@
                 </div>
             </section>
 
-            <button type="button" onclick="generateAIResults()" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
+            <button type="button" onclick="generateAIResults()" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex flex-col items-center justify-center gap-2">
                 <div class="mt-4">
-  <label class="flex items-start gap-2 text-sm text-gray-700">
-    <input type="checkbox" id="clinicalConsent" class="mt-1 w-4 h-4" required>
-    <span>
-      I confirm I have patient consent (or lawful authority) to process this information and I will use the output as clinical decision support only.
-    </span>
-  </label>
-</div>
-
-                Generate AI-Powered Recommendations
+                    <label class="flex items-start gap-2 text-sm text-white">
+                        <input type="checkbox" id="clinicalConsent" class="mt-1 w-4 h-4" required>
+                        <span>
+                            I confirm I have patient consent (or lawful authority) and will use this tool as clinical decision support only.
+                        </span>
+                    </label>
+                </div>
+                Generate Clinical Decision Support Summary
             </button>
         </form>
 
         <div id="loading" style="display:none;" class="mt-8 text-center">
             <div class="inline-block w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-            <p class="mt-4 text-gray-600">Claude AI is analyzing patient data and generating personalized recommendations...</p>
+            <p class="mt-4 text-gray-600">Generating draft clinical support summary for clinician review…</p>
         </div>
 
         <div id="results-section" style="display:none;" class="mt-8 space-y-6 animate-fade-in"></div>
@@ -597,6 +599,12 @@ Other notes: ${data.otherComplaint || 'None'}
                 return;
             }
 
+            const consentChecked = document.getElementById("clinicalConsent")?.checked;
+            if (!consentChecked) {
+                alert("Please confirm consent before generating clinical decision support.");
+                return;
+            }
+
             const data = getFormData();
             const clinicalSummary = createClinicalSummary(data);
 
@@ -604,76 +612,25 @@ Other notes: ${data.otherComplaint || 'None'}
             document.getElementById('results-section').style.display = 'none';
 
             try {
-                const prompt = `You are an expert women's health physician specializing in menopause and perimenopause care. Based on the following patient consultation data, provide comprehensive, evidence-based recommendations.
+                const prompt = `You are a clinical decision-support assistant for a qualified medical practitioner.
+You do not replace the clinician. Provide evidence-based considerations to assist clinician decision-making.
 
+Patient consultation summary:
 ${clinicalSummary}
 
 Please provide:
 
-1. RECOMMENDED INVESTIGATIONS
-List all appropriate investigations with clear clinical reasoning. Consider:
-- Hormone levels (FSH, LH, estradiol) based on age and presentation
-- Thyroid function
-- Bone density assessment
-- Cardiovascular risk assessment
-- Screening (cervical, breast)
-- Any other relevant tests based on symptoms and risk factors
+1. Suggested investigations to consider (with brief clinical reasoning)
+2. Draft management considerations (pharmacological and non-pharmacological)
+3. Key clinical issues and red flags
+4. Follow-up and monitoring considerations
+5. Relevant patient education points
 
-2. MANAGEMENT PLAN
-Provide a detailed, personalized management plan including:
+Use professional, neutral language suitable for clinician review.`;
 
-a) Hormone Replacement Therapy (HRT)
-- Assess eligibility based on contraindications
-- Recommend specific formulations (combined vs estrogen-only, transdermal vs oral)
-- Dosing guidance
-- Discuss risks and benefits
-
-b) Non-Hormonal Pharmacological Options
-- SSRIs/SNRIs if indicated
-- Other evidence-based medications
-
-c) Non-Pharmacological Interventions
-- CBT for hot flushes and mood
-- Vaginal moisturizers/lubricants
-- Other evidence-based interventions
-
-d) Lifestyle Modifications
-- Specific recommendations based on patient's current lifestyle
-- Exercise, diet, stress management, sleep hygiene
-- Smoking cessation if relevant
-- Alcohol reduction if relevant
-
-e) Monitoring and Follow-up
-- Specific timeline for reviews
-- What to monitor
-- When to reassess
-
-f) Referrals
-- Specialist referrals if needed (psychology, cardiology, endocrinology, etc.)
-
-3. KEY CLINICAL CONSIDERATIONS
-- Contraception needs (if age <50 and recent LMP)
-- Red flags or concerns
-- Patient education points
-
-Format your response clearly with headers and bullet points. Be specific and evidence-based.`;
-
-                // ✅ Consent gate (requires you added: <input type="checkbox" id="clinicalConsent" ...>)
-                const consentChecked = document.getElementById("clinicalConsent")?.checked;
-                if (!consentChecked) {
-                    document.getElementById('loading').style.display = 'none';
-                    alert("Please confirm consent before generating AI recommendations.");
-                    return;
-                }
-
-                // ✅ Call your Netlify Function (server-side) instead of Anthropic directly
                 const response = await fetch("/.netlify/functions/ai-consult", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        // Optional: only if you set APP_SHARED_SECRET and enforce it in the function
-                        // "x-app-secret": "YOUR_SHARED_SECRET"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         prompt,
                         consent: true
@@ -686,15 +643,13 @@ Format your response clearly with headers and bullet points. Be specific and evi
                 }
 
                 const result = await response.json();
-
-                // ✅ Our Netlify function returns: { text: "..." }
                 const aiResponse = result.text || "(No response returned)";
 
                 displayResults(data, aiResponse);
 
             } catch (error) {
                 document.getElementById('loading').style.display = 'none';
-                alert('Error generating AI recommendations. Please try again.');
+                alert('Error generating clinical decision support summary.');
                 console.error(error);
             }
         }
@@ -713,9 +668,9 @@ Format your response clearly with headers and bullet points. Be specific and evi
                         <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                         </svg>
-                        <h2 class="text-2xl font-bold text-purple-900">AI-Generated Clinical Recommendations</h2>
+                        <h2 class="text-2xl font-bold text-purple-900">Clinical Decision Support Summary (Draft)</h2>
                     </div>
-                    <p class="text-sm text-purple-800">Powered by OpenAI (server-side via Netlify) - Clinical decision support</p>
+                    <p class="text-sm text-purple-800">Generated to assist the treating clinician. Final decisions remain clinician-led.</p>
                 </div>
 
                 <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
@@ -727,7 +682,6 @@ Format your response clearly with headers and bullet points. Be specific and evi
                         <div><strong>Consultation:</strong> ${data.consultDate} (${data.consultType === 'inperson' ? 'In-Person' : 'Telehealth'})</div>
                     </div>
                 </div>
-
 
                 <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
                     <div class="prose max-w-none">
@@ -741,19 +695,9 @@ Format your response clearly with headers and bullet points. Be specific and evi
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                         <div>
-                            <h3 class="font-bold text-yellow-900 mb-2">Important Disclaimer</h3>
+                            <h3 class="font-bold text-yellow-900 mb-2">Professional Disclaimer</h3>
                             <p class="text-sm text-yellow-900">
-                                These are AI-generated recommendations for clinical decision support only. All recommendations must be reviewed, verified, and adapted based on:
-                            </p>
-                            <ul class="text-sm text-yellow-900 list-disc list-inside mt-2 space-y-1">
-                                <li>Individual patient assessment and clinical examination</li>
-                                <li>Current evidence-based guidelines and local protocols</li>
-                                <li>Patient preferences and shared decision-making</li>
-                                <li>Contraindications and drug interactions</li>
-                                <li>Professional clinical judgment</li>
-                            </ul>
-                            <p class="text-sm text-yellow-900 mt-2 font-semibold">
-                                This tool does not replace clinical judgment or patient-physician relationship.
+                                This draft summary is generated using clinical decision-support technology. All content must be reviewed, verified, and applied by the treating clinician in the context of full clinical assessment and current evidence-based guidelines.
                             </p>
                         </div>
                     </div>
@@ -761,15 +705,9 @@ Format your response clearly with headers and bullet points. Be specific and evi
 
                 <div class="flex gap-4">
                     <button onclick="window.print()" class="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-                        </svg>
                         Print Summary
                     </button>
                     <button onclick="copyToClipboard()" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                        </svg>
                         Copy to Clipboard
                     </button>
                 </div>
@@ -781,7 +719,6 @@ Format your response clearly with headers and bullet points. Be specific and evi
         }
 
         function formatAIResponse(response) {
-            // Convert markdown-style formatting to HTML
             let formatted = response
                 .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
@@ -793,10 +730,8 @@ Format your response clearly with headers and bullet points. Be specific and evi
                 .replace(/^\d+\. (.+)$/gm, '<li class="ml-6">$1</li>')
                 .replace(/\n\n/g, '</p><p class="mb-3">');
             
-            // Wrap in paragraphs
             formatted = '<p class="mb-3">' + formatted + '</p>';
             
-            // Wrap consecutive list items in ul tags
             formatted = formatted.replace(/(<li class="ml-6">.*?<\/li>\s*)+/g, function(match) {
                 return '<ul class="list-disc mb-4 space-y-1">' + match + '</ul>';
             });
