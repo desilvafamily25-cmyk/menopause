@@ -658,26 +658,37 @@ f) Referrals
 
 Format your response clearly with headers and bullet points. Be specific and evidence-based.`;
 
-                const response = await fetch("https://api.anthropic.com/v1/messages", {
+                // ✅ Consent gate (requires you added: <input type="checkbox" id="clinicalConsent" ...>)
+                const consentChecked = document.getElementById("clinicalConsent")?.checked;
+                if (!consentChecked) {
+                    document.getElementById('loading').style.display = 'none';
+                    alert("Please confirm consent before generating AI recommendations.");
+                    return;
+                }
+
+                // ✅ Call your Netlify Function (server-side) instead of Anthropic directly
+                const response = await fetch("/.netlify/functions/ai-consult", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        // Optional: only if you set APP_SHARED_SECRET and enforce it in the function
+                        // "x-app-secret": "YOUR_SHARED_SECRET"
                     },
                     body: JSON.stringify({
-                        model: "claude-sonnet-4-20250514",
-                        max_tokens: 4000,
-                        messages: [
-                            { role: "user", content: prompt }
-                        ],
+                        prompt,
+                        consent: true
                     })
                 });
 
                 if (!response.ok) {
-                    throw new Error('AI request failed');
+                    const errText = await response.text();
+                    throw new Error(errText || "AI request failed");
                 }
 
                 const result = await response.json();
-                const aiResponse = result.content[0].text;
+
+                // ✅ Our Netlify function returns: { text: "..." }
+                const aiResponse = result.text || "(No response returned)";
 
                 displayResults(data, aiResponse);
 
@@ -704,7 +715,7 @@ Format your response clearly with headers and bullet points. Be specific and evi
                         </svg>
                         <h2 class="text-2xl font-bold text-purple-900">AI-Generated Clinical Recommendations</h2>
                     </div>
-                    <p class="text-sm text-purple-800">Powered by Claude Sonnet 4 - Evidence-based medical AI</p>
+                    <p class="text-sm text-purple-800">Powered by OpenAI (server-side via Netlify) - Clinical decision support</p>
                 </div>
 
                 <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
@@ -716,6 +727,7 @@ Format your response clearly with headers and bullet points. Be specific and evi
                         <div><strong>Consultation:</strong> ${data.consultDate} (${data.consultType === 'inperson' ? 'In-Person' : 'Telehealth'})</div>
                     </div>
                 </div>
+
 
                 <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
                     <div class="prose max-w-none">
