@@ -1,79 +1,50 @@
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
-
-  let body;
   try {
-    body = JSON.parse(event.body || "{}");
-  } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "Invalid JSON" }) };
-  }
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
 
-  const prompt = body.prompt;
-  const consent = body.consent;
+    const body = JSON.parse(event.body || "{}");
+    const prompt = body.prompt;
 
-  if (consent !== true) {
-    return { statusCode: 400, body: JSON.stringify({ error: "Consent required" }) };
-  }
+    if (!prompt) {
+      return { statusCode: 400, body: "Missing prompt" };
+    }
 
-  if (!prompt || typeof prompt !== "string") {
-    return { statusCode: 400, body: JSON.stringify({ error: "Prompt missing" }) };
-  }
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return { statusCode: 500, body: "OPENAI_API_KEY not set" };
+    }
 
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Server missing OPENAI_API_KEY" }) };
-  }
-
-  try {
-    const r = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1",
-        input: [
-          {
-            role: "system",
-            content:
-              "You are a clinical decision-support assistant for an Australian GP. Provide evidence-based suggestions, contraindications, monitoring, red flags, and follow-up. Do not provide emergency instructions. Output structured headings and bullet points.",
-          },
-          { role: "user", content: prompt },
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: "You are a clinical decision support assistant for menopause care." },
+          { role: "user", content: prompt }
         ],
-        max_output_tokens: 1800,
         temperature: 0.2,
-      }),
+        max_tokens: 1200
+      })
     });
 
-    if (!r.ok) {
-      const txt = await r.text();
-      return { statusCode: r.status, body: txt };
-    }
-
-    const data = await r.json();
-
-    // Extract text from Responses API output
-    let text = "";
-    if (Array.isArray(data.output)) {
-      for (const item of data.output) {
-        if (item?.type === "message" && Array.isArray(item.content)) {
-          for (const c of item.content) {
-            if (c?.type === "output_text" && typeof c.text === "string") text += c.text;
-          }
-        }
-      }
-    }
+    const data = await response.json();
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
-      body: JSON.stringify({ text }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: data.choices[0].message.content })
     };
-  } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: "Server error" }) };
+
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: err.message || "Function crashed"
+    };
   }
 };
-
