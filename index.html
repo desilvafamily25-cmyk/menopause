@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinician-Led Menopause Assessment</title>
+    <title>Clinician-Led Menopause Assessment | PauseSleep</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes fade-in {
@@ -32,428 +32,462 @@
                 top: 0;
             }
         }
+        .brand-gradient {
+            background: linear-gradient(135deg, #2D3E5F 0%, #4A7C6F 100%);
+        }
+        .brand-border {
+            border-color: #4A7C6F;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6">
-        <div class="flex items-center justify-between mb-2">
-            <h1 class="text-3xl font-bold text-purple-900 flex items-center gap-2">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                </svg>
-                Clinician-Led Menopause Assessment
-            </h1>
-            <div class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">
-                Clinical Decision Support
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-stone-100 p-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header with Branding -->
+        <div class="brand-gradient text-white p-8">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white rounded-full p-2 w-20 h-20 flex items-center justify-center">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%232D3E5F'/%3E%3Cpath d='M100 50 Q120 70 100 90 Q80 70 100 50' fill='white'/%3E%3Ctext x='100' y='130' font-family='serif' font-size='24' fill='white' text-anchor='middle' font-weight='bold'%3EPauseSleep%3C/text%3E%3Cpath d='M40 150 Q100 140 160 150' fill='%23B4C9C0' opacity='0.7'/%3E%3Cpath d='M30 165 Q100 155 170 165' fill='%234A7C6F' opacity='0.8'/%3E%3C/svg%3E" alt="PauseSleep Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">Clinician-Led Menopause Assessment</h1>
+                        <p class="text-sm text-gray-200 mt-1">Evidence-Based Clinical Decision Support Tool</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 border border-white border-opacity-20">
+                <p class="text-sm leading-relaxed">
+                    <span class="font-semibold text-lg">Dr Premila Hewage</span><br>
+                    Founder, <a href="https://www.pausesleep.com.au" target="_blank" class="underline hover:text-gray-200 transition-colors">www.PauseSleep.com.au</a><br>
+                    <span class="text-xs text-gray-200 mt-1 inline-block">GP-Led • Evidence-Based • Patient-Centred Care</span>
+                </p>
             </div>
         </div>
-        <p class="text-gray-600 mb-2">
-            Structured menopause consultation tool for use by a qualified health professional.
-        </p>
-        <p class="text-sm text-gray-500 mb-6">
-            Developed by Dr Premila Hewage · Further patient information: 
-            <a href="https://www.pausesleep.com.au" target="_blank" class="text-purple-700 underline">www.pausesleep.com.au</a>
-        </p>
 
-        <form id="consultForm" class="space-y-6">
-            <!-- Patient Details -->
-            <section class="border-l-4 border-purple-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Patient Details</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Patient Name *</label>
-                        <input type="text" id="patientName" required class="w-full border rounded px-3 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Date of Birth *</label>
-                        <input type="date" id="dob" required class="w-full border rounded px-3 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Consultation Date</label>
-                        <input type="date" id="consultDate" class="w-full border rounded px-3 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Consultation Type *</label>
-                        <select id="consultType" required class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="inperson">In-Person</option>
-                            <option value="telehealth">Telehealth</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
+        <!-- Form Content -->
+        <div class="p-6">
+            <div class="bg-teal-50 border-l-4 border-teal-600 p-4 mb-6 rounded-r-lg">
+                <p class="text-sm text-gray-700">
+                    <strong class="text-teal-800">For Healthcare Professionals:</strong> This structured consultation tool assists qualified clinicians in comprehensive menopause assessment and evidence-based management planning.
+                </p>
+            </div>
 
-            <!-- Presenting Complaint -->
-            <section class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Presenting Complaint</h2>
-                <div class="grid md:grid-cols-2 gap-3">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="menstrualChanges" class="w-4 h-4">
-                        <span>Menstrual changes</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="hotFlushes" class="w-4 h-4">
-                        <span>Hot flushes / night sweats</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="moodDisturbance" class="w-4 h-4">
-                        <span>Mood disturbance</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="sleepIssues" class="w-4 h-4">
-                        <span>Sleep issues</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="vaginalDryness" class="w-4 h-4">
-                        <span>Vaginal dryness / sexual discomfort</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="weightChanges" class="w-4 h-4">
-                        <span>Weight changes / fatigue</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="brainFog" class="w-4 h-4">
-                        <span>Brain fog / concentration issues</span>
-                    </label>
-                </div>
-                <div class="mt-3">
-                    <label class="block text-sm font-medium mb-1">Other symptoms</label>
-                    <input type="text" id="otherComplaint" class="w-full border rounded px-3 py-2" placeholder="Describe any other symptoms...">
-                </div>
-            </section>
+            <form id="consultForm" class="space-y-6">
+                <!-- Patient Details -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Patient Details
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Patient Name *</label>
+                            <input type="text" id="patientName" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Date of Birth *</label>
+                            <input type="date" id="dob" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Consultation Date</label>
+                            <input type="date" id="consultDate" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Consultation Type *</label>
+                            <select id="consultType" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="inperson">In-Person</option>
+                                <option value="telehealth">Telehealth</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
 
-            <!-- Menstrual History -->
-            <section class="border-l-4 border-purple-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Menstrual History</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Age of Menarche</label>
-                        <input type="number" id="menarche" min="8" max="20" class="w-full border rounded px-3 py-2">
+                <!-- Presenting Complaint -->
+                <section class="border-l-4 border-stone-400 pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Presenting Complaint</h2>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="menstrualChanges" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Menstrual changes</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="hotFlushes" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Hot flushes / night sweats</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="moodDisturbance" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Mood disturbance</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="sleepIssues" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Sleep issues</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="vaginalDryness" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Vaginal dryness / sexual discomfort</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="weightChanges" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Weight changes / fatigue</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="brainFog" class="w-4 h-4 text-teal-600 focus:ring-teal-500">
+                            <span class="text-sm">Brain fog / concentration issues</span>
+                        </label>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Cycle Regularity</label>
-                        <select id="cycleRegularity" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="regular">Previously regular, now regular</option>
-                            <option value="irregular">Previously regular, now irregular</option>
-                            <option value="alwaysIrregular">Always irregular</option>
-                        </select>
+                    <div class="mt-3">
+                        <label class="block text-sm font-medium mb-1 text-gray-700">Other symptoms</label>
+                        <input type="text" id="otherComplaint" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="Describe any other symptoms...">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Last Menstrual Period (LMP)</label>
-                        <input type="date" id="lmp" class="w-full border rounded px-3 py-2">
+                </section>
+
+                <!-- Menstrual History -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Menstrual History</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Age of Menarche</label>
+                            <input type="number" id="menarche" min="8" max="20" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Cycle Regularity</label>
+                            <select id="cycleRegularity" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="regular">Previously regular, now regular</option>
+                                <option value="irregular">Previously regular, now irregular</option>
+                                <option value="alwaysIrregular">Always irregular</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Last Menstrual Period (LMP)</label>
+                            <input type="date" id="lmp" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Recent Changes</label>
+                            <div class="space-y-1">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" value="irregular" class="recent-changes w-4 h-4 text-teal-600">
+                                    <span class="text-sm">Irregular</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" value="missed" class="recent-changes w-4 h-4 text-teal-600">
+                                    <span class="text-sm">Missed periods</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" value="heavy" class="recent-changes w-4 h-4 text-teal-600">
+                                    <span class="text-sm">Heavy bleeding</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" value="none" class="recent-changes w-4 h-4 text-teal-600">
+                                    <span class="text-sm">None</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Recent Changes</label>
-                        <div class="space-y-1">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" value="irregular" class="recent-changes w-4 h-4">
-                                <span class="text-sm">Irregular</span>
+                </section>
+
+                <!-- Vasomotor Symptoms -->
+                <section class="border-l-4 border-stone-400 pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Vasomotor Symptoms</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Hot Flushes?</label>
+                            <select id="hasHotFlushes" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div id="flushFrequencyDiv" style="display:none;">
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Frequency</label>
+                            <select id="flushFrequency" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="occasional">Occasional (few per week)</option>
+                                <option value="frequent">Frequent (daily)</option>
+                                <option value="severe">Severe (multiple times per day)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Night Sweats?</label>
+                            <select id="hasNightSweats" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div id="sweatsDisturbSleepDiv" style="display:none;">
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Disturbs Sleep?</label>
+                            <select id="sweatsDisturbSleep" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Psychological Symptoms -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Psychological Symptoms</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Mood Issues (anxiety/low mood)?</label>
+                            <select id="moodIssues" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="mild">Mild</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="severe">Severe</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Sleep Quality</label>
+                            <select id="sleepQuality" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Brain Fog / Cognitive Issues?</label>
+                            <select id="cognitiveIssues" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Urogenital Symptoms -->
+                <section class="border-l-4 border-stone-400 pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Urogenital Symptoms</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Vaginal Dryness/Irritation?</label>
+                            <select id="vaginalSymptoms" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Pain with Sex (Dyspareunia)?</label>
+                            <select id="dyspareunia" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Urinary Frequency/Urgency/UTIs?</label>
+                            <select id="urinarySymptoms" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other Systemic Symptoms -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Other Systemic Symptoms</h2>
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="fatigue" class="w-4 h-4 text-teal-600">
+                            <span class="text-sm">Fatigue / Weight Gain</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="jointAches" class="w-4 h-4 text-teal-600">
+                            <span class="text-sm">Joint Aches</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="headaches" class="w-4 h-4 text-teal-600">
+                            <span class="text-sm">Headaches</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer hover:bg-stone-100 p-2 rounded transition-colors">
+                            <input type="checkbox" id="libidoChanges" class="w-4 h-4 text-teal-600">
+                            <span class="text-sm">Libido Changes</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Medical History -->
+                <section class="border-l-4 border-stone-400 pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Relevant Medical History</h2>
+                    <div class="mb-3">
+                        <label class="block text-sm font-medium mb-2 text-gray-700">History of:</label>
+                        <div class="grid md:grid-cols-3 gap-2">
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="breastCancer" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Breast Cancer</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" value="missed" class="recent-changes w-4 h-4">
-                                <span class="text-sm">Missed periods</span>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="endometrialCancer" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Endometrial Cancer</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" value="heavy" class="recent-changes w-4 h-4">
-                                <span class="text-sm">Heavy bleeding</span>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="vte" class="medical-history w-4 h-4 text-teal-600">
+                                <span>VTE</span>
                             </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" value="none" class="recent-changes w-4 h-4">
-                                <span class="text-sm">None</span>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="cvd" class="medical-history w-4 h-4 text-teal-600">
+                                <span>CVD</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="stroke" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Stroke</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="migraines" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Migraines</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="liverDisease" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Liver Disease</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="osteoporosis" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Osteoporosis</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-sm hover:bg-stone-100 p-2 rounded transition-colors">
+                                <input type="checkbox" value="thyroid" class="medical-history w-4 h-4 text-teal-600">
+                                <span>Thyroid Dysfunction</span>
                             </label>
                         </div>
                     </div>
-                </div>
-            </section>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Current Medications</label>
+                            <input type="text" id="currentMeds" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="List current medications...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Allergies</label>
+                            <input type="text" id="allergies" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="List any allergies...">
+                        </div>
+                    </div>
+                </section>
 
-            <!-- Vasomotor Symptoms -->
-            <section class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Vasomotor Symptoms</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Hot Flushes?</label>
-                        <select id="hasHotFlushes" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
+                <!-- Family History -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Family History</h2>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Breast/Ovarian/Endometrial Cancer?</label>
+                            <select id="familyCancer" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Cardiovascular Disease?</label>
+                            <select id="familyCVD" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Osteoporosis?</label>
+                            <select id="familyOsteoporosis" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
                     </div>
-                    <div id="flushFrequencyDiv" style="display:none;">
-                        <label class="block text-sm font-medium mb-1">Frequency</label>
-                        <select id="flushFrequency" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="occasional">Occasional (few per week)</option>
-                            <option value="frequent">Frequent (daily)</option>
-                            <option value="severe">Severe (multiple times per day)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Night Sweats?</label>
-                        <select id="hasNightSweats" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                    <div id="sweatsDisturbSleepDiv" style="display:none;">
-                        <label class="block text-sm font-medium mb-1">Disturbs Sleep?</label>
-                        <select id="sweatsDisturbSleep" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Psychological Symptoms -->
-            <section class="border-l-4 border-purple-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Psychological Symptoms</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Mood Issues (anxiety/low mood)?</label>
-                        <select id="moodIssues" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="mild">Mild</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="severe">Severe</option>
-                        </select>
+                <!-- Lifestyle Factors -->
+                <section class="border-l-4 border-stone-400 pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Lifestyle Factors</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Smoking?</label>
+                            <select id="smoking" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                                <option value="former">Former smoker</option>
+                            </select>
+                        </div>
+                        <div id="smokingAmountDiv" style="display:none;">
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Cigarettes per Day</label>
+                            <input type="number" id="smokingAmount" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Alcohol Intake</label>
+                            <select id="alcohol" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="none">None</option>
+                                <option value="light">Light (1-7 drinks/week)</option>
+                                <option value="moderate">Moderate (8-14 drinks/week)</option>
+                                <option value="heavy">Heavy (>14 drinks/week)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Physical Activity</label>
+                            <select id="exercise" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="sedentary">Sedentary</option>
+                                <option value="light">Light (1-2 days/week)</option>
+                                <option value="moderate">Moderate (3-4 days/week)</option>
+                                <option value="active">Active (5+ days/week)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">BMI (if known)</label>
+                            <input type="number" step="0.1" id="bmi" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="e.g., 24.5">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Stress Level</label>
+                            <select id="stressLevel" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="low">Low</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Sleep Quality</label>
-                        <select id="sleepQuality" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="good">Good</option>
-                            <option value="fair">Fair</option>
-                            <option value="poor">Poor</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Brain Fog / Cognitive Issues?</label>
-                        <select id="cognitiveIssues" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Urogenital Symptoms -->
-            <section class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Urogenital Symptoms</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Vaginal Dryness/Irritation?</label>
-                        <select id="vaginalSymptoms" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Pain with Sex (Dyspareunia)?</label>
-                        <select id="dyspareunia" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Urinary Frequency/Urgency/UTIs?</label>
-                        <select id="urinarySymptoms" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Other Systemic Symptoms -->
-            <section class="border-l-4 border-purple-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Other Systemic Symptoms</h2>
-                <div class="grid md:grid-cols-2 gap-3">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="fatigue" class="w-4 h-4">
-                        <span>Fatigue / Weight Gain</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="jointAches" class="w-4 h-4">
-                        <span>Joint Aches</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="headaches" class="w-4 h-4">
-                        <span>Headaches</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="libidoChanges" class="w-4 h-4">
-                        <span>Libido Changes</span>
-                    </label>
-                </div>
-            </section>
-
-            <!-- Medical History -->
-            <section class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Relevant Medical History</h2>
-                <div class="mb-3">
-                    <label class="block text-sm font-medium mb-2">History of:</label>
-                    <div class="grid md:grid-cols-3 gap-2">
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="breastCancer" class="medical-history w-4 h-4">
-                            <span>Breast Cancer</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="endometrialCancer" class="medical-history w-4 h-4">
-                            <span>Endometrial Cancer</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="vte" class="medical-history w-4 h-4">
-                            <span>VTE</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="cvd" class="medical-history w-4 h-4">
-                            <span>CVD</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="stroke" class="medical-history w-4 h-4">
-                            <span>Stroke</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="migraines" class="medical-history w-4 h-4">
-                            <span>Migraines</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="liverDisease" class="medical-history w-4 h-4">
-                            <span>Liver Disease</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="osteoporosis" class="medical-history w-4 h-4">
-                            <span>Osteoporosis</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm">
-                            <input type="checkbox" value="thyroid" class="medical-history w-4 h-4">
-                            <span>Thyroid Dysfunction</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Current Medications</label>
-                        <input type="text" id="currentMeds" class="w-full border rounded px-3 py-2" placeholder="List current medications...">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Allergies</label>
-                        <input type="text" id="allergies" class="w-full border rounded px-3 py-2" placeholder="List any allergies...">
-                    </div>
-                </div>
-            </section>
-
-            <!-- Family History -->
-            <section class="border-l-4 border-purple-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Family History</h2>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Breast/Ovarian/Endometrial Cancer?</label>
-                        <select id="familyCancer" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Cardiovascular Disease?</label>
-                        <select id="familyCVD" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Osteoporosis?</label>
-                        <select id="familyOsteoporosis" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Lifestyle Factors -->
-            <section class="border-l-4 border-pink-500 pl-4">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Lifestyle Factors</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Smoking?</label>
-                        <select id="smoking" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                            <option value="former">Former smoker</option>
-                        </select>
-                    </div>
-                    <div id="smokingAmountDiv" style="display:none;">
-                        <label class="block text-sm font-medium mb-1">Cigarettes per Day</label>
-                        <input type="number" id="smokingAmount" class="w-full border rounded px-3 py-2">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Alcohol Intake</label>
-                        <select id="alcohol" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="none">None</option>
-                            <option value="light">Light (1-7 drinks/week)</option>
-                            <option value="moderate">Moderate (8-14 drinks/week)</option>
-                            <option value="heavy">Heavy (>14 drinks/week)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Physical Activity</label>
-                        <select id="exercise" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="sedentary">Sedentary</option>
-                            <option value="light">Light (1-2 days/week)</option>
-                            <option value="moderate">Moderate (3-4 days/week)</option>
-                            <option value="active">Active (5+ days/week)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">BMI (if known)</label>
-                        <input type="number" step="0.1" id="bmi" class="w-full border rounded px-3 py-2" placeholder="e.g., 24.5">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Stress Level</label>
-                        <select id="stressLevel" class="w-full border rounded px-3 py-2">
-                            <option value="">Select...</option>
-                            <option value="low">Low</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <button type="button" onclick="generateAIResults()" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex flex-col items-center justify-center gap-2">
-                <div class="mt-4">
-                    <label class="flex items-start gap-2 text-sm text-white">
-                        <input type="checkbox" id="clinicalConsent" class="mt-1 w-4 h-4" required>
-                        <span>
-                            I confirm I have patient consent (or lawful authority) and will use this tool as clinical decision support only.
+                <!-- Consent and Submit -->
+                <div class="bg-gradient-to-br from-stone-50 to-teal-50 border-2 border-teal-200 rounded-lg p-6">
+                    <label class="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                        <input type="checkbox" id="clinicalConsent" class="mt-1 w-5 h-5 text-teal-600 focus:ring-teal-500 rounded" required>
+                        <span class="leading-relaxed">
+                            <strong class="text-teal-900">Clinical Consent Confirmation:</strong> I confirm I have patient consent (or lawful authority) and will use this tool as clinical decision support only. All clinical decisions remain the responsibility of the treating clinician.
                         </span>
                     </label>
                 </div>
-                Generate Clinical Decision Support Summary
-            </button>
-        </form>
 
-        <div id="loading" style="display:none;" class="mt-8 text-center">
-            <div class="inline-block w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-            <p class="mt-4 text-gray-600">Generating draft clinical support summary for clinician review…</p>
+                <button type="button" onclick="generateAIResults()" class="w-full brand-gradient text-white py-4 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.01] flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Generate Clinical Decision Support Summary
+                </button>
+            </form>
+
+            <div id="loading" style="display:none;" class="mt-8 text-center">
+                <div class="inline-block w-12 h-12 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin"></div>
+                <p class="mt-4 text-gray-600">Generating draft clinical support summary for clinician review…</p>
+            </div>
+
+            <div id="results-section" style="display:none;" class="mt-8 space-y-6 animate-fade-in"></div>
         </div>
 
-        <div id="results-section" style="display:none;" class="mt-8 space-y-6 animate-fade-in"></div>
+        <!-- Footer -->
+        <div class="bg-stone-100 border-t border-stone-200 p-6 text-center text-sm text-gray-600">
+            <p>Developed by <strong class="text-teal-800">Dr Premila Hewage</strong> | <a href="https://www.pausesleep.com.au" target="_blank" class="text-teal-700 hover:text-teal-800 underline">www.PauseSleep.com.au</a></p>
+            <p class="mt-1 text-xs text-gray-500">Evidence-Based Clinical Decision Support for Menopause Care</p>
+        </div>
     </div>
 
     <script>
@@ -663,18 +697,23 @@ Use professional, neutral language suitable for clinician review.`;
             const age = calculateAge(data.dob);
             
             resultsSection.innerHTML = `
-                <div class="bg-gradient-to-r from-purple-100 to-pink-100 border-l-4 border-purple-600 p-6 rounded-lg">
+                <div class="bg-gradient-to-r from-teal-50 to-stone-50 border-l-4 border-teal-600 p-6 rounded-lg shadow-md">
                     <div class="flex items-center gap-2 mb-3">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                         </svg>
-                        <h2 class="text-2xl font-bold text-purple-900">Clinical Decision Support Summary (Draft)</h2>
+                        <h2 class="text-2xl font-bold text-gray-900">Clinical Decision Support Summary</h2>
                     </div>
-                    <p class="text-sm text-purple-800">Generated to assist the treating clinician. Final decisions remain clinician-led.</p>
+                    <p class="text-sm text-teal-800">Generated draft to assist the treating clinician. Final decisions remain clinician-led.</p>
                 </div>
 
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
-                    <h2 class="text-xl font-bold text-blue-900 mb-4">Patient Summary</h2>
+                <div class="bg-stone-50 border-l-4 border-stone-500 p-6 rounded-lg">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Patient Summary
+                    </h2>
                     <div class="grid md:grid-cols-2 gap-4 text-gray-800">
                         <div><strong>Patient:</strong> ${data.patientName}</div>
                         <div><strong>Age:</strong> ${age} years</div>
@@ -683,20 +722,20 @@ Use professional, neutral language suitable for clinician review.`;
                     </div>
                 </div>
 
-                <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+                <div class="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
                     <div class="prose max-w-none">
                         ${formatAIResponse(aiResponse)}
                     </div>
                 </div>
 
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-lg">
                     <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                         <div>
-                            <h3 class="font-bold text-yellow-900 mb-2">Professional Disclaimer</h3>
-                            <p class="text-sm text-yellow-900">
+                            <h3 class="font-bold text-amber-900 mb-2">Professional Disclaimer</h3>
+                            <p class="text-sm text-amber-900">
                                 This draft summary is generated using clinical decision-support technology. All content must be reviewed, verified, and applied by the treating clinician in the context of full clinical assessment and current evidence-based guidelines.
                             </p>
                         </div>
@@ -704,10 +743,16 @@ Use professional, neutral language suitable for clinician review.`;
                 </div>
 
                 <div class="flex gap-4">
-                    <button onclick="window.print()" class="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all flex items-center justify-center gap-2">
+                    <button onclick="window.print()" class="flex-1 bg-stone-700 text-white py-3 rounded-lg font-semibold hover:bg-stone-800 transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
                         Print Summary
                     </button>
-                    <button onclick="copyToClipboard()" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all flex items-center justify-center gap-2">
+                    <button onclick="copyToClipboard()" class="flex-1 brand-gradient text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
                         Copy to Clipboard
                     </button>
                 </div>
