@@ -565,6 +565,96 @@
             return new Date().getFullYear() - new Date(dob).getFullYear();
         }
 
+        function getPositiveSymptoms(data) {
+            const symptoms = [];
+            
+            // Vasomotor symptoms
+            if (data.hasHotFlushes === 'yes') {
+                symptoms.push(`Hot flushes (${data.flushFrequency || 'frequency not specified'})`);
+            }
+            if (data.hasNightSweats === 'yes') {
+                symptoms.push(`Night sweats${data.sweatsDisturbSleep === 'yes' ? ' (disturbs sleep)' : ''}`);
+            }
+            
+            // Menstrual changes
+            if (data.menstrualChanges || data.cycleRegularity === 'irregular' || data.recentChanges.length > 0) {
+                const changes = data.recentChanges.filter(c => c !== 'none').join(', ');
+                symptoms.push(`Menstrual changes${changes ? ': ' + changes : ''}`);
+            }
+            
+            // Psychological symptoms
+            if (data.moodIssues && data.moodIssues !== 'no') {
+                symptoms.push(`Mood disturbance (${data.moodIssues})`);
+            }
+            if (data.sleepQuality === 'poor' || data.sleepQuality === 'fair') {
+                symptoms.push(`Sleep quality: ${data.sleepQuality}`);
+            }
+            if (data.cognitiveIssues === 'yes') {
+                symptoms.push('Brain fog / cognitive issues');
+            }
+            
+            // Urogenital symptoms
+            if (data.vaginalSymptoms === 'yes') {
+                symptoms.push('Vaginal dryness/irritation');
+            }
+            if (data.dyspareunia === 'yes') {
+                symptoms.push('Dyspareunia (painful intercourse)');
+            }
+            if (data.urinarySymptoms === 'yes') {
+                symptoms.push('Urinary symptoms');
+            }
+            
+            // Other systemic symptoms
+            if (data.fatigue) symptoms.push('Fatigue / weight changes');
+            if (data.jointAches) symptoms.push('Joint aches');
+            if (data.headaches) symptoms.push('Headaches');
+            if (data.libidoChanges) symptoms.push('Libido changes');
+            
+            // Other complaints
+            if (data.otherComplaint) {
+                symptoms.push(data.otherComplaint);
+            }
+            
+            return symptoms;
+        }
+
+        function getImportantNegatives(data) {
+            const negatives = [];
+            
+            // Important negatives for menopause assessment
+            if (data.hasHotFlushes === 'no') {
+                negatives.push('No hot flushes');
+            }
+            if (data.hasNightSweats === 'no') {
+                negatives.push('No night sweats');
+            }
+            if (data.moodIssues === 'no') {
+                negatives.push('No mood disturbance');
+            }
+            if (data.vaginalSymptoms === 'no') {
+                negatives.push('No vaginal dryness/irritation');
+            }
+            if (data.dyspareunia === 'no') {
+                negatives.push('No dyspareunia');
+            }
+            if (data.urinarySymptoms === 'no') {
+                negatives.push('No urinary symptoms');
+            }
+            if (data.cognitiveIssues === 'no') {
+                negatives.push('No cognitive issues');
+            }
+            if (data.sleepQuality === 'good') {
+                negatives.push('Good sleep quality');
+            }
+            
+            // Important medical history negatives
+            if (data.medicalHistory.length === 0) {
+                negatives.push('No significant medical history');
+            }
+            
+            return negatives;
+        }
+
         function createClinicalSummary(data) {
             const age = calculateAge(data.dob);
             const symptoms = [];
@@ -700,6 +790,8 @@ Use professional, neutral language suitable for clinician review.`;
             resultsSection.style.display = 'block';
             
             const age = calculateAge(data.dob);
+            const positiveSymptoms = getPositiveSymptoms(data);
+            const importantNegatives = getImportantNegatives(data);
             
             resultsSection.innerHTML = `
                 <div class="bg-gradient-to-r from-teal-50 to-stone-50 border-l-4 border-teal-600 p-6 rounded-lg shadow-md">
@@ -725,6 +817,34 @@ Use professional, neutral language suitable for clinician review.`;
                         <div><strong>DOB:</strong> ${data.dob}</div>
                         <div><strong>Consultation:</strong> ${data.consultDate} (${data.consultType === 'inperson' ? 'In-Person' : 'Telehealth'})</div>
                     </div>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Positive Symptoms (Patient-Reported)
+                    </h2>
+                    ${positiveSymptoms.length > 0 ? `
+                        <ul class="list-disc ml-6 space-y-1 text-gray-800">
+                            ${positiveSymptoms.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    ` : '<p class="text-gray-600 italic">No significant symptoms reported</p>'}
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Important Negative Findings
+                    </h2>
+                    ${importantNegatives.length > 0 ? `
+                        <ul class="list-disc ml-6 space-y-1 text-gray-800">
+                            ${importantNegatives.map(n => `<li>${n}</li>`).join('')}
+                        </ul>
+                    ` : '<p class="text-gray-600 italic">No significant negative findings documented</p>'}
                 </div>
 
                 <div class="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
