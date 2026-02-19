@@ -290,6 +290,65 @@
                     </div>
                 </section>
 
+                <!-- Preventative Health Screening -->
+                <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Preventative Health Screening</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Last Cervical Screening Test (year)</label>
+                            <input type="number" id="cervicalYear" min="1990" max="2026" placeholder="YYYY" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Result</label>
+                            <select id="cervicalResult" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                                <option value="notdone">Not done</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Last Mammogram (year)</label>
+                            <input type="number" id="mammogramYear" min="1990" max="2026" placeholder="YYYY" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Result</label>
+                            <select id="mammogramResult" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                                <option value="notdone">Not done</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">DEXA/Bone Density Scan (year)</label>
+                            <input type="number" id="dexaYear" min="1990" max="2026" placeholder="YYYY" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Result</label>
+                            <select id="dexaResult" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                                <option value="notdone">Not done</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Bowel Cancer Screening (year)</label>
+                            <input type="number" id="bowelYear" min="1990" max="2026" placeholder="YYYY" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1 text-gray-700">Result</label>
+                            <select id="bowelResult" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                                <option value="">Select...</option>
+                                <option value="normal">Normal</option>
+                                <option value="abnormal">Abnormal</option>
+                                <option value="notdone">Not done</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Menopause Symptoms -->
                 <section class="border-l-4 brand-border pl-4 bg-stone-50 p-4 rounded-r-lg">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">Menopause Symptoms</h2>
@@ -466,6 +525,14 @@
                 numPregnancies: document.getElementById('numPregnancies').value,
                 numVaginal: document.getElementById('numVaginal').value,
                 numCaesarean: document.getElementById('numCaesarean').value,
+                cervicalYear: document.getElementById('cervicalYear').value,
+                cervicalResult: document.getElementById('cervicalResult').value,
+                mammogramYear: document.getElementById('mammogramYear').value,
+                mammogramResult: document.getElementById('mammogramResult').value,
+                dexaYear: document.getElementById('dexaYear').value,
+                dexaResult: document.getElementById('dexaResult').value,
+                bowelYear: document.getElementById('bowelYear').value,
+                bowelResult: document.getElementById('bowelResult').value,
                 symHot: getRadioValue('sym_hot'),
                 symIrritability: getRadioValue('sym_irritability'),
                 symMood: getRadioValue('sym_mood'),
@@ -539,6 +606,12 @@
             if (data.reasonMental) reasonsChecked.push('mental health');
             if (data.reasonOther) reasonsChecked.push('other');
 
+            const screeningInfo = [];
+            if (data.cervicalYear) screeningInfo.push(`Cervical screening: ${data.cervicalYear} (${data.cervicalResult || 'result not specified'})`);
+            if (data.mammogramYear) screeningInfo.push(`Mammogram: ${data.mammogramYear} (${data.mammogramResult || 'result not specified'})`);
+            if (data.dexaYear) screeningInfo.push(`DEXA scan: ${data.dexaYear} (${data.dexaResult || 'result not specified'})`);
+            if (data.bowelYear) screeningInfo.push(`Bowel screening: ${data.bowelYear} (${data.bowelResult || 'result not specified'})`);
+
             return `
 Patient: ${data.patientName}
 Age: ${age} years (DOB: ${data.dob})
@@ -560,6 +633,9 @@ Menstrual History:
 - Last period: ${data.lmp || 'Not specified'}
 - Concerns: ${data.menstrualConcerns.join(', ') || 'None'}
 - Pregnancies: ${data.numPregnancies || '0'} (Vaginal: ${data.numVaginal || '0'}, Caesarean: ${data.numCaesarean || '0'})
+
+Preventative Health Screening:
+${screeningInfo.length > 0 ? screeningInfo.join('\n') : '- No screening data provided'}
 
 Menopause Symptoms:
 - Hot flushes/night sweats: ${data.symHot}
