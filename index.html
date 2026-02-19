@@ -677,21 +677,125 @@ Lifestyle:
             document.getElementById('results-section').style.display = 'none';
 
             try {
-                const prompt = `You are a clinical decision-support assistant for a qualified medical practitioner.
-You do not replace the clinician. Provide evidence-based considerations to assist clinician decision-making.
+                const prompt = `You are an evidence-based clinical decision support system for Australian menopause care. You MUST follow RACGP (Royal Australian College of General Practitioners), AMS (Australasian Menopause Society), and MBS item 695 guidelines STRICTLY.
+
+CRITICAL INSTRUCTIONS:
+1. Base ALL recommendations ONLY on the patient data provided below
+2. Do NOT infer, assume, or fabricate any clinical information not explicitly stated
+3. If information is missing, state "Further assessment required" - never guess
+4. All medication recommendations must align with PBS (Pharmaceutical Benefits Scheme) listings and TGA approvals for menopause
+5. Flag absolute and relative contraindications to MHT (Menopausal Hormone Therapy) based on medical history provided
+6. Cite specific guideline references where applicable (RACGP, AMS, or MBS 695)
 
 Patient consultation summary:
 ${clinicalSummary}
 
-Please provide:
+Provide a structured clinical decision support summary with the following sections:
 
-1. Suggested investigations to consider (with brief clinical reasoning)
-2. Draft management considerations (pharmacological and non-pharmacological)
-3. Key clinical issues and red flags
-4. Follow-up and monitoring considerations
-5. Relevant patient education points
+## 1. SAFETY ASSESSMENT & CONTRAINDICATIONS
+- List ALL absolute contraindications to MHT based on patient's medical history (if none, state "No absolute contraindications identified from provided history")
+- List ALL relative contraindications requiring specialist input or caution
+- Identify any red flags requiring urgent investigation (unexplained vaginal bleeding, breast lumps, etc.)
+- State cardiovascular risk factors present (smoking, age, BMI, family history)
 
-Use professional, neutral language suitable for clinician review.`;
+## 2. MENOPAUSE STAGE CLASSIFICATION
+Based on menstrual history provided, classify as:
+- Perimenopause (irregular periods, within 12 months of LMP)
+- Postmenopause (>12 months amenorrhoea)
+- Premature ovarian insufficiency (<40 years)
+- Early menopause (40-45 years)
+- Cannot be determined from provided data (state what additional information is needed)
+
+## 3. INVESTIGATIONS TO CONSIDER
+List ONLY investigations indicated by the patient's presentation and history:
+- FSH/LH/E2 (only if age <40-45 or diagnosis uncertain)
+- Thyroid function (only if symptoms overlap with thyroid dysfunction or thyroid history present)
+- Lipid profile (cardiovascular risk assessment, MBS item 66551)
+- Glucose/HbA1c (if BMI >25 or family history diabetes)
+- Bone density (DEXA) - only if risk factors present: early menopause, prolonged amenorrhoea, low BMI, steroid use, fracture history
+- Mammogram (if overdue per BreastScreen Australia guidelines: 50-74 years every 2 years)
+- Cervical screening (if overdue per NCSP guidelines)
+- State if investigations are for MBS item 695 eligibility or other clinical indication
+
+## 4. EVIDENCE-BASED MANAGEMENT CONSIDERATIONS
+
+### A. MENOPAUSAL HORMONE THERAPY (MHT) - Only if NO absolute contraindications
+**Estrogen options (if contraindications absent):**
+- Transdermal estradiol (patches/gel) - preferred for lower VTE risk, especially if cardiovascular risk factors
+- Oral estradiol (if patient preference and lower cardiovascular risk)
+- Specify PBS criteria for subsidised prescribing
+
+**Progestogen requirements (MANDATORY if uterus present):**
+- Micronised progesterone (Prometrium) 200mg nocte continuously - preferred for better safety profile
+- Levonorgestrel IUD (Mirena) for endometrial protection + contraception if <50 years
+- Medroxyprogesterone or norethisterone alternatives (specify indications)
+
+**If uterus absent:** Estrogen-only therapy (no progestogen required)
+
+**GSM (Genitourinary Syndrome of Menopause) specific:**
+- Vaginal estrogen (Ovestin cream, Vagifem pessaries) for local symptoms - minimal systemic absorption, safe even with contraindications to systemic MHT
+
+### B. NON-HORMONAL OPTIONS
+**For vasomotor symptoms (if MHT contraindicated or patient preference):**
+- SSRIs: Paroxetine 7.5mg (only TGA-approved non-hormonal for hot flushes), escitalopram, venlafaxine
+- Gabapentin 300-900mg (off-label, evidence-based)
+- Clonidine (lesser evidence, consider if others unsuitable)
+
+**Lifestyle interventions (evidence-based):**
+- Weight management (if BMI >25)
+- Regular exercise (150 min/week moderate intensity - reduces vasomotor symptoms, cardiovascular risk, bone loss)
+- Smoking cessation (MANDATORY if smoking - reduces cardiovascular risk, improves MHT safety)
+- Calcium 1000-1300mg/day + Vitamin D 1000 IU/day (bone health)
+- Limit alcohol to <10 standard drinks/week (NHMRC guidelines)
+
+### C. SYMPTOM-SPECIFIC MANAGEMENT
+**For each reported moderate/severe symptom, provide targeted approach:**
+- Sleep disturbance: Address night sweats, sleep hygiene, consider CBT-I, avoid sedatives unless severe
+- Mood/anxiety: Screen with validated tools (PHQ-9, GAD-7), consider psychology referral, SSRIs if moderate-severe
+- GSM (vaginal dryness/dyspareunia): Vaginal estrogen first-line, lubricants, moisturisers
+- Reduced libido: Exclude other causes (medications, relationship, mood), address GSM, testosterone NOT PBS-listed for women
+
+## 5. PREVENTATIVE HEALTH & SCREENING
+Review screening status against current Australian guidelines:
+- Cervical screening: Due if >2 years since last (NCSP guidelines)
+- Mammogram: Due if 50-74 years and >2 years since last (BreastScreen Australia)
+- Bone density (DEXA): Indicated if risk factors present (list specific factors if present)
+- Cardiovascular risk assessment: Indicated if >45 years (earlier if risk factors) - Australian CVD risk calculator
+- Bowel screening: Due if 50-74 years and >2 years since last (NBCSP)
+
+## 6. MBS ITEM 695 ELIGIBILITY & REQUIREMENTS
+**Current eligibility (if applicable):**
+- Patient age/menopause status meets criteria
+- Checklist completed fulfils documentation requirements
+- Eligible for longer consultation (minimum 20-40 minutes MBS 695)
+- Can support case conference or management plan development
+
+## 7. FOLLOW-UP & MONITORING PLAN
+- Review in 6-12 weeks if commencing new MHT (dose titration, side effects, symptom control)
+- Annual review for established MHT (lowest effective dose principle, ongoing risk-benefit)
+- Repeat investigations timing (specify which and when based on initial findings)
+- Safety monitoring (breast awareness, report any unusual bleeding, VTE symptoms education)
+
+## 8. PATIENT EDUCATION & RESOURCES (Evidence-based only)
+- Jean Hailes for Women's Health (www.jeanhailes.org.au) - Australian evidence-based menopause information
+- Australasian Menopause Society (www.menopause.org.au) - patient fact sheets
+- HealthDirect menopause information (www.healthdirect.gov.au)
+- Discuss risks vs benefits of MHT specific to patient's profile
+- VTE warning signs (leg pain, swelling, chest pain, SOB)
+- When to seek urgent review (vaginal bleeding if postmenopausal, breast lumps, severe symptoms)
+
+## IMPORTANT LIMITATIONS
+- This summary is based ONLY on patient-reported questionnaire data
+- Full clinical assessment, physical examination, and investigation results required for final treatment decisions
+- All recommendations require clinician review, verification, and individualisation
+- Contraindications are based on provided history only - may be incomplete
+- No liability accepted - treating clinician retains full responsibility for all clinical decisions
+
+## CLINICIAN NOTES
+[Space for clinician to add their own assessment, examination findings, and final management plan]
+
+---
+*Generated using evidence-based clinical decision support. Clinician verification mandatory. References: RACGP Red Book (2023), AMS Guidelines (2022), MBS Online, PBS Schedule.*`;
 
                 const response = await fetch("/.netlify/functions/ai-consult", {
                     method: "POST",
